@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:islami/features/home/ui/widgets/hadeth/ui/hadeth_screen.dart';
+import 'package:islami/features/home/ui/widgets/quran/ui/quran_screen.dart';
+import 'package:islami/features/home/ui/widgets/radio/ui/radio_screen.dart';
+import 'package:islami/features/home/ui/widgets/sebha/ui/sebha_screen.dart';
+import 'package:islami/features/home/ui/widgets/time/ui/time_screen.dart';
 
 import '../../../utils/app_colors.dart';
 
@@ -13,6 +18,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   int currentIndex = 0;
+
+  List<Widget> pages = [
+    const QuranScreen(),
+    const HadethScreen(),
+    const SebhaScreen(),
+    const RadioScreen(),
+    const TimeScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-        )
+        ),
+        body: pages[currentIndex]
     );
   }
 }
