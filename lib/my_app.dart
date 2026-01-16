@@ -13,7 +13,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(
-        scaffoldBackgroundColor: AppColors.black
+        scaffoldBackgroundColor: AppColors.black,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: AppColors.gold,
+          selectionColor: AppColors.gold,
+          selectionHandleColor: AppColors.gold,
+        ),
       ),
       themeMode: ThemeMode.dark,
       initialRoute: AppRoutes.onBoarding,
