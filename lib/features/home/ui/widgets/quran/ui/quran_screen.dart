@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:islami/features/home/ui/widgets/quran/ui/widget/quran_details/widget/quran_arguments.dart';
+import 'package:islami/utils/app_routes.dart';
 
 import '../../../../../../utils/app_colors.dart';
 import '../../../../../../utils/app_text_styles.dart';
+import '../../../../logic/sura_list.dart';
 
 class QuranScreen extends StatelessWidget {
   const QuranScreen({super.key});
@@ -110,28 +113,38 @@ class QuranScreen extends StatelessWidget {
                   ListView.separated(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 10,
+                    itemCount: SuraList.ayaNumber.length,
                     itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Image.asset("assets/images/img_sur_number_frame.png"),
-                              Text("${index + 1}", style: AppTextStyles.font20BoldWhite,)
-                            ],
-                          ),
-                          SizedBox(width: width * 0.05,),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Al-Fatiha", style: AppTextStyles.font20BoldWhite,),
-                              Text("7 Verses", style: AppTextStyles.font14BoldWhite,)
-                            ],
-                          ),
-                          Spacer(),
-                          Text("الفاتحه", style: AppTextStyles.font20BoldWhite,)
-                        ],
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, AppRoutes.quranDetails,
+                              arguments: QuranArguments(
+                                  index: index,
+                                  arabicSurahQuran: SuraList.arabicQuranSuras[index],
+                                  englishSurahQuran: SuraList.englishQuranSuras[index]
+                              ));
+                        },
+                        child: Row(
+                          children: [
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Image.asset("assets/images/img_sur_number_frame.png"),
+                                Text("${index + 1}", style: AppTextStyles.font20BoldWhite,)
+                              ],
+                            ),
+                            SizedBox(width: width * 0.05,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(SuraList.englishQuranSuras[index], style: AppTextStyles.font20BoldWhite,),
+                                Text("${SuraList.ayaNumber[index]} Verses", style: AppTextStyles.font14BoldWhite,)
+                              ],
+                            ),
+                            Spacer(),
+                            Text(SuraList.arabicQuranSuras[index], style: AppTextStyles.font20BoldWhite,)
+                          ],
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) {

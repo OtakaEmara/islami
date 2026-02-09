@@ -17,10 +17,22 @@ class AppTextStyles{
       color: AppColors.white
   );
 
+  static TextStyle font15BoldWhite = GoogleFonts.elMessiri(
+      fontSize: 15,
+      fontWeight: FontWeight.bold,
+      color: AppColors.white
+  );
+
   static TextStyle font16BoldGold = GoogleFonts.elMessiri(
     fontSize: 16,
     fontWeight: FontWeight.bold,
     color: AppColors.gold
+  );
+
+  static TextStyle font16BoldBlack = GoogleFonts.elMessiri(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: AppColors.black
   );
 
   static TextStyle font16BoldLightWhite = GoogleFonts.elMessiri(
@@ -33,6 +45,12 @@ class AppTextStyles{
     fontSize: 20,
     fontWeight: FontWeight.bold,
     color: AppColors.gold
+  );
+
+  static TextStyle font20BoldBlack = GoogleFonts.elMessiri(
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      color: AppColors.black
   );
 
   static TextStyle font20BoldWhite = GoogleFonts.elMessiri(

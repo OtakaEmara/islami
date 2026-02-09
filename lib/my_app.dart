@@ -3,6 +3,7 @@ import 'package:islami/utils/app_colors.dart';
 import 'package:islami/utils/app_routes.dart';
 
 import 'features/home/ui/home_screen.dart';
+import 'features/home/ui/widgets/quran/ui/widget/quran_details/quran_details.dart';
 import 'features/onboarding/ui/onboarding_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,6 +15,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(
         scaffoldBackgroundColor: AppColors.black,
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.black,
+          iconTheme: IconThemeData(
+            color: AppColors.gold
+          ),
+          centerTitle: true
+        ),
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: AppColors.gold,
           selectionColor: AppColors.gold,
@@ -25,6 +33,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.onBoarding: (context) => const OnBoardingScreen(),
         AppRoutes.home: (context) => const HomeScreen(),
+        AppRoutes.quranDetails : (context) => QuranDetails()
       },
     );
   }
