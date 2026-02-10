@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami/utils/app_colors.dart';
 import 'package:islami/utils/app_text_styles.dart';
 
 class HadethScreen extends StatefulWidget {
@@ -79,7 +78,7 @@ class _HadethScreenState extends State<HadethScreen> {
                           autoPlayCurve: Curves.bounceInOut,
                           enlargeCenterPage: true,
                         ),
-                      ) : Center(child: CircularProgressIndicator(color: AppColors.gold,)),
+                      ) : Container(),
                     ),
                   )
                 ],

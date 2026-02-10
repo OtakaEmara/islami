@@ -6,8 +6,53 @@ import '../../../../../../utils/app_colors.dart';
 import '../../../../../../utils/app_text_styles.dart';
 import '../../../../logic/sura_list.dart';
 
-class QuranScreen extends StatelessWidget {
+class QuranScreen extends StatefulWidget {
   const QuranScreen({super.key});
+
+  @override
+  State<QuranScreen> createState() => _QuranScreenState();
+}
+
+class _QuranScreenState extends State<QuranScreen> {
+
+  List<String> filteredSuraArabicList= [];
+  List<String> filteredSuraEnglishList= [];
+  List<String> filteredSuraAyaList= [];
+  String text = '';
+
+  void getSearch(){
+    filteredSuraEnglishList = [];
+    filteredSuraArabicList = [];
+    filteredSuraAyaList = [];
+    for(int i = 0 ; i < 114 ; i++){
+      if(text.isNotEmpty){
+        if(SuraList.arabicQuranSuras[i].toString().toLowerCase().contains(text)){
+          filteredSuraArabicList.add(SuraList.arabicQuranSuras[i]);
+          filteredSuraEnglishList.add(SuraList.englishQuranSuras[i]);
+          filteredSuraAyaList.add(SuraList.ayaNumber[i]);
+        }
+        if(SuraList.englishQuranSuras[i].toString().toLowerCase().contains(text)){
+          filteredSuraArabicList.add(SuraList.arabicQuranSuras[i]);
+          filteredSuraEnglishList.add(SuraList.englishQuranSuras[i]);
+          filteredSuraAyaList.add(SuraList.ayaNumber[i]);
+        }
+      }else{
+        filteredSuraArabicList = SuraList.arabicQuranSuras;
+        filteredSuraEnglishList = SuraList.englishQuranSuras;
+        filteredSuraAyaList = SuraList.ayaNumber;
+      }
+    }
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getSearch();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +72,11 @@ class QuranScreen extends StatelessWidget {
                 children: [
                   Center(child: Image.asset("assets/images/islami.png")),
                   TextField(
+                    onChanged: (value) {
+                      text = value;
+                      getSearch();
+                    },
+                    textAlign: TextAlign.start,
                     style: AppTextStyles.font16BoldLightWhite,
                     decoration: InputDecoration(
                       hintText: "Sura Name",
@@ -48,13 +98,17 @@ class QuranScreen extends StatelessWidget {
                       ),
                     )
                   ),
-                  SizedBox(height: height * 0.02),
-                  Text(
+                  if(text.isEmpty)
+                    SizedBox(height: height * 0.02),
+                  if(text.isEmpty)
+                    Text(
                     "Most Recently",
                     style: AppTextStyles.font16BoldLightWhite,
                   ),
-                  SizedBox(height: height * 0.01),
-                  SizedBox(
+                  if(text.isEmpty)
+                    SizedBox(height: height * 0.01),
+                  if(text.isEmpty)
+                    SizedBox(
                     height: height * 0.15,
                     width: width,
                     child: ListView.separated(
@@ -104,24 +158,21 @@ class QuranScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  SizedBox(height: height * 0.02),
-                  Text(
-                    "Sura List",
-                    style: AppTextStyles.font16BoldLightWhite,
-                  ),
-                  SizedBox(height: height * 0.01),
+                  if(text.isEmpty)
+                    SizedBox(height: height * 0.02),
+                  SizedBox(height: text.isNotEmpty?height * 0.03:height * 0.01),
                   ListView.separated(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: SuraList.ayaNumber.length,
+                    itemCount: filteredSuraAyaList.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, AppRoutes.quranDetails,
                               arguments: QuranArguments(
                                   index: index,
-                                  arabicSurahQuran: SuraList.arabicQuranSuras[index],
-                                  englishSurahQuran: SuraList.englishQuranSuras[index]
+                                  arabicSurahQuran: filteredSuraArabicList[index],
+                                  englishSurahQuran: filteredSuraEnglishList[index]
                               ));
                         },
                         child: Row(
@@ -137,12 +188,12 @@ class QuranScreen extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(SuraList.englishQuranSuras[index], style: AppTextStyles.font20BoldWhite,),
+                                Text(filteredSuraEnglishList[index], style: AppTextStyles.font20BoldWhite,),
                                 Text("${SuraList.ayaNumber[index]} Verses", style: AppTextStyles.font14BoldWhite,)
                               ],
                             ),
                             Spacer(),
-                            Text(SuraList.arabicQuranSuras[index], style: AppTextStyles.font20BoldWhite,)
+                            Text(filteredSuraArabicList[index], style: AppTextStyles.font20BoldWhite,)
                           ],
                         ),
                       );
