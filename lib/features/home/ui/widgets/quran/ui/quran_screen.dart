@@ -4,7 +4,6 @@ import 'package:islami/utils/app_routes.dart';
 
 import '../../../../../../utils/app_colors.dart';
 import '../../../../../../utils/app_text_styles.dart';
-import '../../../../../../utils/shared_preference.dart';
 import '../../../../logic/sura_list.dart';
 
 class QuranScreen extends StatefulWidget {
@@ -47,29 +46,12 @@ class _QuranScreenState extends State<QuranScreen> {
 
     });
   }
-  List<String> englishList = [];
-  List<String> arabicList = [];
-  List<String> ayaList = [];
-
-  void getMostRecent(){
-    englishList = [];
-    arabicList = [];
-    ayaList = [];
-    englishList = SharedPref.getEnglishList("englishList") ?? [];
-    arabicList = SharedPref.getArabicList("arabicList") ?? [];
-    ayaList = SharedPref.getAyaList("ayaList") ?? [];
-    print(englishList);
-    setState(() {
-
-    });
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getSearch();
-    getMostRecent();
   }
 
   @override
@@ -116,69 +98,7 @@ class _QuranScreenState extends State<QuranScreen> {
                       ),
                     )
                   ),
-                  if(text.isEmpty)
-                    SizedBox(height: height * 0.02),
-                  if(text.isEmpty)
-                    Text(
-                    "Most Recently",
-                    style: AppTextStyles.font16BoldLightWhite,
-                  ),
-                  if(text.isEmpty)
-                    SizedBox(height: height * 0.01),
-                  if(text.isEmpty)
-                    SizedBox(
-                    height: height * 0.15,
-                    width: width,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: englishList.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: height * 0.01,
-                              horizontal: width * 0.03
-                          ),
-                          height: height * 0.15,
-                          width: width * 0.7,
-                          decoration: BoxDecoration(
-                            color: AppColors.gold,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    englishList[index],
-                                    style: AppTextStyles.font24BoldBlack,
-                                  ),
-                                  SizedBox(width: width * 0.02),
-                                  Text(
-                                    arabicList[index],
-                                    style: AppTextStyles.font24BoldBlack,
-                                  ),
-                                  Text(
-                                    "${ayaList[index]} Verses",
-                                    style: AppTextStyles.font14BoldBlack,
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Image.asset("assets/images/img_most_recent.png")
-                            ],
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return SizedBox(width: width * 0.02);
-                      },
-                    ),
-                  ),
-                  if(text.isEmpty)
-                    SizedBox(height: height * 0.02),
-                  SizedBox(height: text.isNotEmpty?height * 0.03:height * 0.01),
+                  SizedBox(height: height * 0.03),
                   ListView.separated(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -186,9 +106,6 @@ class _QuranScreenState extends State<QuranScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          SharedPref.saveEnglishList("englishList", List.generate(114, (index) => SuraList.englishQuranSuras[index]));
-                          SharedPref.saveArabicList("arabicList", List.generate(114, (index) => SuraList.arabicQuranSuras[index]));
-                          SharedPref.saveAyaList("ayaList", List.generate(114, (index) => SuraList.ayaNumber[index]));
                           Navigator.pushNamed(context, AppRoutes.quranDetails,
                               arguments: QuranArguments(
                                   index: index,

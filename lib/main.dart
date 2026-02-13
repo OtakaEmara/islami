@@ -5,8 +5,8 @@ import 'my_app.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.initSharedPreference();
-  SharedPref.getEnglishList("englishList");
-  SharedPref.getArabicList("arabicList");
-  SharedPref.getAyaList("ayaList");
-  runApp(const MyApp());
+  bool? onBoarding = SharedPref.getBool("onBoarding") ?? false;
+  runApp(MyApp(
+    onBoarding: onBoarding,
+  ));
 }

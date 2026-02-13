@@ -7,36 +7,20 @@ class SharedPref{
     sharedPreference =  await SharedPreferences.getInstance();
   }
 
-  static Future<void> saveString(String key, String value) async{
-    await sharedPreference.setString(key, value);
+  static Future<void> saveBool(String key, bool value) async{
+    await sharedPreference.setBool(key, value);
   }
 
-  static Future<void> saveEnglishList(String key, List<String> englishList) async {
-    await sharedPreference.setStringList(key, englishList);
+  static Future<void> saveInt(String key, int value) async{
+    await sharedPreference.setInt(key, value);
   }
 
-  static Future<void> saveArabicList(String key, List<String> arabicList) async {
-    await sharedPreference.setStringList(key, arabicList);
+  static int? getInt(String key) {
+    return sharedPreference.getInt(key);
   }
 
-  static Future<void> saveAyaList(String key, List<String> ayaList) async {
-    await sharedPreference.setStringList(key, ayaList);
-  }
-
-  static String? getString(String key) {
-    return sharedPreference.getString(key);
-  }
-
-  static List<String>? getEnglishList(String key) {
-    return sharedPreference.getStringList(key);
-  }
-
-  static List<String>? getArabicList(String key) {
-    return sharedPreference.getStringList(key);
-  }
-
-  static List<String>? getAyaList(String key) {
-    return sharedPreference.getStringList(key);
+  static bool? getBool(String key) {
+    return sharedPreference.getBool(key);
   }
 
 }

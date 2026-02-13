@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/features/home/ui/widgets/hadeth/ui/hadeth_screen.dart';
 import 'package:islami/features/home/ui/widgets/quran/ui/quran_screen.dart';
-import 'package:islami/features/home/ui/widgets/radio/ui/radio_screen.dart';
 import 'package:islami/features/home/ui/widgets/sebha/ui/sebha_screen.dart';
-import 'package:islami/features/home/ui/widgets/time/ui/time_screen.dart';
 
 import '../../../utils/app_colors.dart';
 
@@ -23,8 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     const QuranScreen(),
     const HadethScreen(),
     const SebhaScreen(),
-    const RadioScreen(),
-    const TimeScreen(),
   ];
 
   @override
@@ -75,14 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
               bottomNavDesign(
                   imageName: 'sebha_tab',
                   index: 2
-              ),
-              bottomNavDesign(
-                  imageName: 'radio_tab',
-                  index: 3
-              ),
-              bottomNavDesign(
-                  imageName: 'time_tab',
-                  index: 4
               ),
             ],
           ),

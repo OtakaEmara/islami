@@ -4,6 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_routes.dart';
 import '../../../../utils/app_text_styles.dart';
+import '../../../../utils/shared_preference.dart';
 
 class PageViewFormating extends StatelessWidget {
   const PageViewFormating({super.key});
@@ -37,11 +38,10 @@ class PageViewFormating extends StatelessWidget {
     }
 
     List<Widget> pages = [
-      pageViewContent(imageName: "welcome", title: "Welcome To Islmi App"),
+      pageViewContent(imageName: "welcome", title: "Welcome To Islami App"),
       pageViewContent(imageName: "mosque", title: "Welcome To Islami", subtitle: "We Are Very Excited To Have You In Our Community"),
       pageViewContent(imageName: "quran", title: "Reading the Quran", subtitle: 'Read, and your Lord is the Most Generous'),
       pageViewContent(imageName: "bearish", title: "Bearish",subtitle: "Praise the name of your Lord, the Most High"),
-      pageViewContent(imageName: "radio", title: "Holy Quran Radio", subtitle: 'You can listen to the Holy Quran Radio through the application for free and easily'),
     ];
 
     return PageView.builder(
@@ -102,7 +102,9 @@ class PageViewFormating extends StatelessWidget {
                       if(index == pages.length - 1)
                         TextButton(
                             onPressed: (){
-                              Navigator.pushReplacementNamed(context, AppRoutes.home);
+                              SharedPref.saveBool("onBoarding", true).then((value) {
+                                Navigator.pushReplacementNamed(context, AppRoutes.home);
+                              });
                             },
                             child: Text("Finish",style: AppTextStyles.font16BoldGold,)
                         )
