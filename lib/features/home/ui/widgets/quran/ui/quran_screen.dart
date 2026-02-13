@@ -4,6 +4,7 @@ import 'package:islami/utils/app_routes.dart';
 
 import '../../../../../../utils/app_colors.dart';
 import '../../../../../../utils/app_text_styles.dart';
+import '../../../../../../utils/shared_preference.dart';
 import '../../../../logic/sura_list.dart';
 
 class QuranScreen extends StatefulWidget {
@@ -46,12 +47,29 @@ class _QuranScreenState extends State<QuranScreen> {
 
     });
   }
+  List<String> englishList = [];
+  List<String> arabicList = [];
+  List<String> ayaList = [];
+
+  void getMostRecent(){
+    englishList = [];
+    arabicList = [];
+    ayaList = [];
+    englishList = SharedPref.getEnglishList("englishList") ?? [];
+    arabicList = SharedPref.getArabicList("arabicList") ?? [];
+    ayaList = SharedPref.getAyaList("ayaList") ?? [];
+    print(englishList);
+    setState(() {
+
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getSearch();
+    getMostRecent();
   }
 
   @override
@@ -113,7 +131,7 @@ class _QuranScreenState extends State<QuranScreen> {
                     width: width,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 4,
+                      itemCount: englishList.length,
                       itemBuilder: (context, index) {
                         return Container(
                           padding: EdgeInsets.symmetric(
@@ -133,16 +151,16 @@ class _QuranScreenState extends State<QuranScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Al-Fatiha",
+                                    englishList[index],
                                     style: AppTextStyles.font24BoldBlack,
                                   ),
                                   SizedBox(width: width * 0.02),
                                   Text(
-                                    "الفاتحة",
+                                    arabicList[index],
                                     style: AppTextStyles.font24BoldBlack,
                                   ),
                                   Text(
-                                    "7 Verses",
+                                    "${ayaList[index]} Verses",
                                     style: AppTextStyles.font14BoldBlack,
                                   ),
                                 ],
@@ -168,6 +186,9 @@ class _QuranScreenState extends State<QuranScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
+                          SharedPref.saveEnglishList("englishList", List.generate(114, (index) => SuraList.englishQuranSuras[index]));
+                          SharedPref.saveArabicList("arabicList", List.generate(114, (index) => SuraList.arabicQuranSuras[index]));
+                          SharedPref.saveAyaList("ayaList", List.generate(114, (index) => SuraList.ayaNumber[index]));
                           Navigator.pushNamed(context, AppRoutes.quranDetails,
                               arguments: QuranArguments(
                                   index: index,
