@@ -31,7 +31,6 @@ class _QuranDetailsState extends State<QuranDetails> {
       String file = await rootBundle.loadString('assets/files/surahs/${quranArguments.index + 1}.txt');
       List<String> surah = file.split('\n');
       surahDetails = surah;
-      Future.delayed(Duration(seconds: 1));
       setState(() {
 
       });
