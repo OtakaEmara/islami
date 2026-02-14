@@ -119,7 +119,7 @@ class _QuranScreenState extends State<QuranScreen> {
                               alignment: Alignment.center,
                               children: [
                                 Image.asset("assets/images/img_sur_number_frame.png"),
-                                Text("${index + 1}", style: AppTextStyles.font20BoldWhite,)
+                                Text("${index + 1}", style: AppTextStyles.font16BoldWhite,)
                               ],
                             ),
                             SizedBox(width: width * 0.05,),

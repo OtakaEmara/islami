@@ -80,7 +80,7 @@ class _QuranDetailsState extends State<QuranDetails> {
                                   Stack(
                                     alignment: Alignment.center,
                                     children: [
-                                      Image.asset("assets/images/img_sur_number_frame.png", color: selectedIndex == index ? AppColors.black : AppColors.gold, height: height * 0.05,),
+                                      Image.asset("assets/images/img_sur_number_frame.png", color: selectedIndex == index ? AppColors.black : AppColors.gold, height: height * 0.06,),
                                       Text("${index + 1}", style: AppTextStyles.font15BoldWhite.copyWith(color: selectedIndex == index ? AppColors.black : AppColors.gold),)
                                     ],
                                   ),
