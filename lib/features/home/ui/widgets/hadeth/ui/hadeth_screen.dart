@@ -22,6 +22,7 @@ class _HadethScreenState extends State<HadethScreen> {
       title.add(file.substring(0,file.indexOf('\n')));
       content.add(file.substring(file.indexOf('\n')));
     }
+    Future.delayed(Duration(seconds: 1));
     setState(() {
 
     });
@@ -67,6 +68,7 @@ class _HadethScreenState extends State<HadethScreen> {
                                         child: SingleChildScrollView(child: Text(content[index],style: AppTextStyles.font16BoldBlack,textAlign: TextAlign.center,)),
                                       ),
                                     ),
+                                    SizedBox(height: height * 0.02,),
                                   ],
                                 ),
                               ],

@@ -42,6 +42,7 @@ class _QuranScreenState extends State<QuranScreen> {
         filteredSuraAyaList = SuraList.ayaNumber;
       }
     }
+    Future.delayed(Duration(seconds: 1));
     setState(() {
 
     });

@@ -52,137 +52,141 @@ class _SebhaScreenState extends State<SebhaScreen> {
       children: [
         Image.asset("assets/images/sebha_screen.png"),
         SafeArea(
-          child: Column(
-            children: [
-              Center(child: Image.asset("assets/images/islami.png")),
-              SizedBox(height: height * 0.001,),
-              Text("سَبِّحِ اسْمَ رَبِّكَ الأعلى ",style: AppTextStyles.font36BoldWhite,),
-              SizedBox(height: height * 0.01,),
-              GestureDetector(
-                onTap: (){
-                  if(isSubhan){
-                    subhanCounter++;
-                    SharedPref.saveInt("subhanCounter", subhanCounter);
-                  }
-                  if(isHamd){
-                    hamdCounter++;
-                    SharedPref.saveInt("hamdCounter", hamdCounter);
-                  }
-                  if(isAkbar){
-                    akbarCounter++;
-                    SharedPref.saveInt("akbarCounter", akbarCounter);
-                  }
-                  setState(() {
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+            child: Column(
+              children: [
+                Center(child: Image.asset("assets/images/islami.png")),
+                SizedBox(height: height * 0.001,),
+                Text("سَبِّحِ اسْمَ رَبِّكَ الأعلى ",style: AppTextStyles.font36BoldWhite,),
+                SizedBox(height: height * 0.01,),
+                GestureDetector(
+                  onTap: (){
+                    if(isSubhan){
+                      subhanCounter++;
+                      SharedPref.saveInt("subhanCounter", subhanCounter);
+                    }
+                    if(isHamd){
+                      hamdCounter++;
+                      SharedPref.saveInt("hamdCounter", hamdCounter);
+                    }
+                    if(isAkbar){
+                      akbarCounter++;
+                      SharedPref.saveInt("akbarCounter", akbarCounter);
+                    }
+                    setState(() {
 
-                  });
-                },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset("assets/images/sebha_shape.png"),
-                    Column(
-                      children: [
-                        SizedBox(height: height * 0.1,),
-                        Text(text,style: AppTextStyles.font36BoldWhite,),
-                        SizedBox(height: height * 0.01,),
-                        if(isSubhan)
-                          Column(
-                            children: [
-                              Text("$subhanCounter",style: AppTextStyles.font36BoldWhite,),
-                              SizedBox(height: height * 0.02,),
-                              if(subhanCounter != 0)
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      subhanCounter = 0;
-                                    });
-                                  },
-                                  child: Text('Reset' , style: AppTextStyles.font20BoldWhite.copyWith(color: Colors.red),)
-                              )
-                            ],
-                          ),
-                        if(isHamd)
-                          Column(
-                            children: [
-                              Text("$hamdCounter",style: AppTextStyles.font36BoldWhite,),
-                              SizedBox(height: height * 0.02),
-                              if(hamdCounter != 0)
-                                GestureDetector(
+                    });
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset("assets/images/sebha_shape.png"),
+                      Column(
+                        children: [
+                          SizedBox(height: height * 0.1,),
+                          Text(text,style: AppTextStyles.font36BoldWhite,),
+                          SizedBox(height: height * 0.01,),
+                          if(isSubhan)
+                            Column(
+                              children: [
+                                Text("$subhanCounter",style: AppTextStyles.font36BoldWhite,),
+                                SizedBox(height: height * 0.02,),
+                                if(subhanCounter != 0)
+                                  GestureDetector(
                                     onTap: (){
                                       setState(() {
-                                        hamdCounter = 0;
-                                      });
-                                    },
-                                    child: Text('Reset', style: AppTextStyles.font20BoldWhite.copyWith(color: Colors.red),)
-                                )
-                            ],
-                          ),
-                        if(isAkbar)
-                          Column(
-                            children: [
-                              Text("$akbarCounter",style: AppTextStyles.font36BoldWhite,),
-                              SizedBox(height: height * 0.02),
-                              if(akbarCounter != 0)
-                                GestureDetector(
-                                    onTap: (){
-                                      setState(() {
-                                        akbarCounter = 0;
+                                        subhanCounter = 0;
                                       });
                                     },
                                     child: Text('Reset' , style: AppTextStyles.font20BoldWhite.copyWith(color: Colors.red),)
                                 )
-                            ],
-                          ),
-                      ],
-                    )
-                  ],
+                              ],
+                            ),
+                          if(isHamd)
+                            Column(
+                              children: [
+                                Text("$hamdCounter",style: AppTextStyles.font36BoldWhite,),
+                                SizedBox(height: height * 0.02),
+                                if(hamdCounter != 0)
+                                  GestureDetector(
+                                      onTap: (){
+                                        setState(() {
+                                          hamdCounter = 0;
+                                        });
+                                      },
+                                      child: Text('Reset', style: AppTextStyles.font20BoldWhite.copyWith(color: Colors.red),)
+                                  )
+                              ],
+                            ),
+                          if(isAkbar)
+                            Column(
+                              children: [
+                                Text("$akbarCounter",style: AppTextStyles.font36BoldWhite,),
+                                SizedBox(height: height * 0.02),
+                                if(akbarCounter != 0)
+                                  GestureDetector(
+                                      onTap: (){
+                                        setState(() {
+                                          akbarCounter = 0;
+                                        });
+                                      },
+                                      child: Text('Reset' , style: AppTextStyles.font20BoldWhite.copyWith(color: Colors.red),)
+                                  )
+                              ],
+                            ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: height * 0.03,),
-              Padding(
-                padding: EdgeInsets.all(height * 0.001),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    sebhaDesign(
-                      text: 'الله أَكْبَرُ',
-                      onTap: (){
-                        setState(() {
-                          text = 'الله أَكْبَرُ';
+                SizedBox(height: height * 0.03,),
+                Padding(
+                  padding: EdgeInsets.all(height * 0.001),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      sebhaDesign(
+                        text: 'الله أَكْبَرُ',
+                        onTap: (){
+                          setState(() {
+                            text = 'الله أَكْبَرُ';
+                            isSubhan = false;
+                            isHamd = false;
+                            isAkbar = true;
+                          });
+                        },
+                      ),
+                      sebhaDesign(
+                        text: 'الحمد للهُ',
+                        onTap: (){
+                          text = 'الحمد للهُ';
                           isSubhan = false;
+                          isHamd = true;
+                          isAkbar = false;
+                          setState(() {
+
+                          });
+                        },
+                      ),
+                      sebhaDesign(
+                        text: 'سبحان الله',
+                        onTap: (){
+                          text = 'سبحان الله';
+                          isSubhan = true;
                           isHamd = false;
-                          isAkbar = true;
-                        });
-                      },
-                    ),
-                    sebhaDesign(
-                      text: 'الحمد للهُ',
-                      onTap: (){
-                        text = 'الحمد للهُ';
-                        isSubhan = false;
-                        isHamd = true;
-                        isAkbar = false;
-                        setState(() {
+                          isAkbar = false;
+                          setState(() {
 
-                        });
-                      },
-                    ),
-                    sebhaDesign(
-                      text: 'سبحان الله',
-                      onTap: (){
-                        text = 'سبحان الله';
-                        isSubhan = true;
-                        isHamd = false;
-                        isAkbar = false;
-                        setState(() {
-
-                        });
-                      },
-                    ),
-                  ],
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+                SizedBox(height: height * 0.001,),
+              ],
+            ),
           ),
         )
       ],
