@@ -18,28 +18,33 @@ class _QuranScreenState extends State<QuranScreen> {
   List<String> filteredSuraArabicList= [];
   List<String> filteredSuraEnglishList= [];
   List<String> filteredSuraAyaList= [];
+  List<int> filteredSuraIndexList= [];
   String text = '';
 
   void getSearch(){
     filteredSuraEnglishList = [];
     filteredSuraArabicList = [];
     filteredSuraAyaList = [];
+    filteredSuraIndexList = [];
     for(int i = 0 ; i < 114 ; i++){
       if(text.isNotEmpty){
         if(SuraList.arabicQuranSuras[i].toString().toLowerCase().contains(text)){
           filteredSuraArabicList.add(SuraList.arabicQuranSuras[i]);
           filteredSuraEnglishList.add(SuraList.englishQuranSuras[i]);
           filteredSuraAyaList.add(SuraList.ayaNumber[i]);
+          filteredSuraIndexList.add(i);
         }
         if(SuraList.englishQuranSuras[i].toString().toLowerCase().contains(text)){
           filteredSuraArabicList.add(SuraList.arabicQuranSuras[i]);
           filteredSuraEnglishList.add(SuraList.englishQuranSuras[i]);
           filteredSuraAyaList.add(SuraList.ayaNumber[i]);
+          filteredSuraIndexList.add(i);
         }
       }else{
         filteredSuraArabicList = SuraList.arabicQuranSuras;
         filteredSuraEnglishList = SuraList.englishQuranSuras;
         filteredSuraAyaList = SuraList.ayaNumber;
+        filteredSuraIndexList = List.generate(114, (index) => index);
       }
     }
     setState(() {
@@ -51,6 +56,7 @@ class _QuranScreenState extends State<QuranScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print(List.generate(114, (index) => index));
     getSearch();
   }
 
@@ -75,6 +81,9 @@ class _QuranScreenState extends State<QuranScreen> {
                     onChanged: (value) {
                       text = value;
                       getSearch();
+                      setState(() {
+
+                      });
                     },
                     textAlign: TextAlign.start,
                     style: AppTextStyles.font16BoldLightWhite,
@@ -108,7 +117,7 @@ class _QuranScreenState extends State<QuranScreen> {
                         onTap: () {
                           Navigator.pushNamed(context, AppRoutes.quranDetails,
                               arguments: QuranArguments(
-                                  index: index,
+                                  index: filteredSuraIndexList[index],
                                   arabicSurahQuran: filteredSuraArabicList[index],
                                   englishSurahQuran: filteredSuraEnglishList[index]
                               ));
@@ -119,7 +128,7 @@ class _QuranScreenState extends State<QuranScreen> {
                               alignment: Alignment.center,
                               children: [
                                 Image.asset("assets/images/img_sur_number_frame.png"),
-                                Text("${index + 1}", style: AppTextStyles.font16BoldWhite,)
+                                Text("${filteredSuraIndexList[index] + 1}", style: AppTextStyles.font16BoldWhite,)
                               ],
                             ),
                             SizedBox(width: width * 0.05,),
