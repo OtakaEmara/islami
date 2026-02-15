@@ -97,6 +97,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
                                     onTap: (){
                                       setState(() {
                                         subhanCounter = 0;
+                                        SharedPref.saveInt("subhanCounter", subhanCounter);
                                       });
                                     },
                                     child: Text('Reset' , style: AppTextStyles.font20BoldWhite.copyWith(color: Colors.red),)
@@ -113,6 +114,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
                                       onTap: (){
                                         setState(() {
                                           hamdCounter = 0;
+                                          SharedPref.saveInt("hamdCounter", hamdCounter);
                                         });
                                       },
                                       child: Text('Reset', style: AppTextStyles.font20BoldWhite.copyWith(color: Colors.red),)
@@ -129,6 +131,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
                                       onTap: (){
                                         setState(() {
                                           akbarCounter = 0;
+                                          SharedPref.saveInt("akbarCounter", akbarCounter);
                                         });
                                       },
                                       child: Text('Reset' , style: AppTextStyles.font20BoldWhite.copyWith(color: Colors.red),)
